@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gerador de capas de DVD, Blu-ray, VHS e CD</title>
+<title>@REBOBINA - Gerador de capas de DVD, Blu-ray, VHS e CD</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,500&family=Instrument+Sans:wght@400;600&display=swap">
 <style>
 :root{--bg:#eef0f3;--panel:#fff;--ink:#1b1f27;--mut:#5d6575;--line:#d5d9e0;--ac:#d6246e;--field:#f6f7f9}
@@ -79,7 +79,7 @@ summary{cursor:pointer;font-weight:600}
     <section class="panel sel">
       <div class="row" style="align-items:center"><strong>Editando: <span id="selt">nenhum</span></strong><button class="alt" id="reset" style="flex:0 0 auto;padding:4px 8px">Restaurar posições</button></div>
       <div id="selc" class="msg"></div>
-      <label class="chk"><input type="checkbox" id="guides" checked>Mostrar guias de dobra e do CD (não saem no PNG)</label>
+      <label class="chk"><input type="checkbox" id="guides" checked>Mostrar dobras</label>
     </section>
 
     <section class="panel">
@@ -199,13 +199,13 @@ summary{cursor:pointer;font-weight:600}
 <script>
 // ================= CONFIGURAÇÃO FÁCIL: edite os valores abaixo =================
 const CFG = {
-  tituloSite: 'Gerador de capas',            // título grande no topo da página
+  tituloSite: '@REBOBINAPROJECT Gerador de capas',            // título grande no topo da página
   subtituloSite: 'DVD, Blu-ray, VHS e arte de CD no tamanho real de impressão (300 dpi).',
-  tituloAba: 'Gerador de capas de DVD, Blu-ray, VHS e CD',   // nome que aparece na aba do navegador
+  tituloAba: '@REBOBINAPROJECT Gerador de capas de DVD, Blu-ray, VHS e CD',   // nome que aparece na aba do navegador
   logoSite: 'assets/logo.png',               // logo ao lado do título (se o arquivo não existir, simplesmente não aparece)
   alturaLogo: 44,                            // altura do logo em pixels
   fonteInicial: 'Barlow Condensed',          // fonte padrão dos textos da capa (use o nome igual ao da lista de fontes)
-  coresCapa: { fundo: '#b32d2e', cor2: '#3a0d0e', cor3: '#000000', texto: '#f2f2f2', destaque: '#ffffff' },   // cores iniciais
+  coresCapa: { fundo: '#662400', cor2: '#3a0d0e', cor3: '#000000', texto: '#f2f2f2', destaque: '#1f0000' },   // cores iniciais
   // tamanho inicial dos textos, como proporção da altura da capa (0.03 = 3%)
   tamanhoTexto: { titulo: .09, slogan: .045, sinopse: .024, info: .022, creditos: .025 },
   qrArquivo: 'qr.png', qrTamanhoMm: 14      // QR do Instagram (arquivo na raiz do site) e seu tamanho no PNG
@@ -544,7 +544,7 @@ function renderSel0(){
     box.append(fontSel(p), mkCol('Cor do texto', p.c || defC(k), v => p.c = v)); if (k !== 'stitle') box.append(alignSel(p, k));
     if (k !== 'ftitle') box.append(mkCtl('Tamanho (mm)', 2, 16, .2, k === 'stitle' ? (p.s || p.s0 || 5) : p.s, v => p.s = v));
     if (p.lh) box.append(mkCtl('Entrelinha', .8, 3, .05, p.lh, v => p.lh = v));
-    if (k === 'info') box.append(mkCol('Cor do fundo', p.bgc, v => p.bgc = v), mkCtl('Opacidade do fundo (%)', 0, 100, 1, p.bgo ?? 100, v => p.bgo = v), mkChk('Sem fundo', p.nobg, v => { p.nobg = v; draw(); }), mkChk('Rótulos em negrito', p.b, v => { p.b = v; draw(); }), mkChk('Rótulos sublinhados', p.u, v => { p.u = v; draw(); }));
+    if (k === 'info') box.append(mkCol('Cor do fundo', p.bgc, v => p.bgc = v), mkCtl('Opacidade do fundo (%)', 0, 100, 1, p.bgo ?? 100, v => p.bgo = v), mkChk('Sem fundo', p.nobg, v => { p.nobg = v; draw(); }), mkChk('Negrito', p.b, v => { p.b = v; draw(); }), mkChk('Sublinhado', p.u, v => { p.u = v; draw(); }));
     if (k === 'ftitle') box.append(full(document.createTextNode('A largura da caixa define o tamanho do título.')));
   }
 }
